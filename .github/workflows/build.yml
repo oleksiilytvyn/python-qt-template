@@ -1,0 +1,61 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest, macos-13, macos-14 ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Extract version from app/__init__.py
+      - name: Set environment variable
+        run: echo "VERSION=$(python -c 'from app import __version__; print(__version__)')" >> "$GITHUB_ENV"
+        if: runner.os != 'Windows'
+      - name: Set environment variable on Windows
+        run: echo "VERSION=$(python -c 'from app import __version__; print(__version__)')" | Out-File -FilePath $env:GITHUB_ENV -Append
+        if: runner.os == 'Windows'
+
+      - name: Build resources
+        run: pyside6-rcc resources/resources.qrc -o app/resources.py
+        shell: bash
+
+      - name: Build on Windows
+        if: runner.os == 'Windows'
+        run: python setup.py bdist_msi
+        shell: bash
+
+      - name: Build on Linux
+        if: runner.os == 'Linux'
+        run: python setup.py bdist_rpm
+        shell: bash
+
+      - name: Build on MacOS
+        if: runner.os == 'macOS'
+        run: python setup.py bdist_dmg
+        shell: bash
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Application-${{ env.VERSION }}-${{ runner.os }}-${{ runner.arch }}
+          path: |
+            build/*

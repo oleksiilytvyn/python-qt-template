@@ -1,0 +1,35 @@
+name: Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Install dependencies
+        working-directory: ./pages
+        run: pnpm install
+      - name: Set Environment variables
+        run: |
+          # Set version environment variable
+          export VERSION="$(python -c 'from app import __version__; print(__version__)')"
+          # Export to other actions
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          # Save latest version to public
+          echo "{ \"latest\": \"$VERSION\" }" > './pages/public/api/version'
+      - name: Build
+        working-directory: ./pages
+        run: pnpm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages
+          path: pages/dist/*
