@@ -66,7 +66,6 @@ setup(
         'Environment :: X11 Applications',
         'Environment :: X11 Applications :: Qt',
         'Intended Audience :: End Users/Desktop',
-        'Intended Audience :: Religion',
         'Natural Language :: English',
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: Microsoft :: Windows',
@@ -93,7 +92,7 @@ setup(
         "bdist_mac": {
             "bundle_name": f"{application_title}-{version}",
             "custom_info_plist": "resources/bdist/Info.plist",
-            "iconfile": "icon/icon.icns"
+            "iconfile": "resources/icon/icon.icns"
         },
         "bdist_dmg": {
             "volume_label": application_title
@@ -101,7 +100,7 @@ setup(
     },
     executables=[Executable(main_python_file,
                             base="Win32GUI" if sys.platform == "win32" else None,
-                            icon="icon/icon.ico",
+                            icon="resources/icon/icon.ico",
                             shortcut_name=application_title,
                             shortcut_dir="ProgramMenuFolder"
                             )])

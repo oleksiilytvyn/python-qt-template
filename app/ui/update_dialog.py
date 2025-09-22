@@ -27,7 +27,7 @@ class UpdateDialog(QtWidgets.QDialog):
 
     def __ui__(self):
 
-        pixmap = QtGui.QPixmap(":/icons/256.png")
+        pixmap = QtGui.QPixmap(":/icons/icon.png")
         pixmap.setDevicePixelRatio(2)
 
         self._ui_icon = QtWidgets.QLabel(self)

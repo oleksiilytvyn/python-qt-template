@@ -9,32 +9,7 @@ from PySide6 import QtCore, QtGui
 
 
 _icons = {
-    "32": ':/icons/32.png',
-    "64": ':/icons/64.png',
-    "128": ':/icons/128.png',
-    "256": ':/icons/256.png',
-    "512": ':/icons/512.png',
-    "edit": ':/icons/edit.png',
-    "songs": ':/icons/songs.png',
-    "font": ':/icons/font.png',
-    "shadow": ':/icons/shadow.png',
-    "align": ':/icons/align.png',
-    "case": ':/icons/case.png',
-    "color": ':/icons/color.png',
-    "background": ':/icons/background.png',
-    "zone-select": ':/icons/zone-select.png',
-    "selection-select": ':/icons/selection-select.png',
-    "testcard": ':/icons/testcard.png',
-    "text-padding-box": ':/icons/text-padding-box.png',
-    "add": ':/icons/add.png',
-    "media": ':/icons/media.png',
-    "stop": ':/icons/stop.png',
-    "play": ':/icons/play.png',
-    "save": ':/icons/save.png',
-    "live": ':/icons/live.png',
-    "remove-white": ':/icons/remove-white.png',
-    "library": ':/icons/library.png',
-    "search-clear": ':/rc/search-clear.png'
+    "icon": ':/icon/icon.png'
 }
 _icons_cache: dict[str, QtGui.QIcon] = {}
 
@@ -49,11 +24,7 @@ class Icon(QtGui.QIcon):
     def getAppIcon() -> PySide6.QtGui.QIcon:
         if Icon._app_icon is None:
             icon = PySide6.QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap(':/icons/32.png'))
-            icon.addPixmap(QtGui.QPixmap(':/icons/64.png'))
-            icon.addPixmap(QtGui.QPixmap(':/icons/128.png'))
-            icon.addPixmap(QtGui.QPixmap(':/icons/256.png'))
-            icon.addPixmap(QtGui.QPixmap(':/icons/512.png'))
+            icon.addPixmap(QtGui.QPixmap(':/icon/icon.png'))
 
             Icon._app_icon = icon
 

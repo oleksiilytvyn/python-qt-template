@@ -51,7 +51,7 @@ class Application(QtWidgets.QApplication):
         sys.excepthook = self.unhandled_exception
 
         self.setQuitOnLastWindowClosed(False)
-        self.setWindowIcon(QtGui.Icon("256")) # TODO: Use default icon
+        self.setWindowIcon(QtGui.Icon.getAppIcon())
         self.lastWindowClosed.connect(self._closed)
         self.setApplicationVersion(app.__version__)
         self.setApplicationName(app.APPLICATION_NAME)
@@ -141,7 +141,7 @@ class Application(QtWidgets.QApplication):
             logger.info("Checking for updates. Current version: %s", app.__version__)
 
             # TODO: Check for application platform (windows, macos, linux)
-            response = requests.get(f"{app.APPLICATION_WEB}/api/version", timeout=1)
+            response = requests.get(app.VERSION_ENDPOINT, timeout=1)
             latest_version = response.json()['latest']
 
             if packaging.version.parse(latest_version) > packaging.version.parse(app.__version__):

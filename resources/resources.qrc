@@ -1,6 +1,9 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
     <qresource>
+		<file alias="icon/icon.png">icon/icon.png</file>
+		<file alias="icon/icon.svg">icon/icon.svg</file>
+
         <file alias="qt/branch_closed-on.png">qt/branch_closed-on.png</file>
         <file alias="qt/branch_closed.png">qt/branch_closed.png</file>
         <file alias="qt/branch_open-on.png">qt/branch_open-on.png</file>

@@ -16,7 +16,6 @@ from qt.QtWidgets.QImageListWidget import QImageListWidget
 from qt.QtWidgets.QLineEdit import QLineEdit
 from qt.QtWidgets.QListWidget import QListWidget  # type: ignore
 from qt.QtWidgets.QListWidgetItem import QListWidgetItem  # type: ignore
-from qt.QtWidgets.media_widget import MediaWidget
 from qt.QtWidgets.QMessageDialog import QMessageDialog
 # Dialogs
 from qt.QtWidgets.QPopup import QPopup
