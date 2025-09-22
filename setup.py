@@ -95,7 +95,7 @@ setup(
             "iconfile": "resources/icon/icon.icns"
         },
         "bdist_dmg": {
-            "volume_label": application_title
+            "volume_label": f"{application_title}-{version}"
         }
     },
     executables=[Executable(main_python_file,

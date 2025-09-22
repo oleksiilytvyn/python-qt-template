@@ -54,8 +54,25 @@ jobs:
         shell: bash
 
       - name: Upload artifact
+        if: runner.os == 'macOS'
         uses: actions/upload-artifact@v4
         with:
           name: Application-${{ env.VERSION }}-${{ runner.os }}-${{ runner.arch }}
           path: |
-            build/*
+            build/*.dmg
+
+      - name: Upload artifact
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Application-${{ env.VERSION }}-${{ runner.os }}-${{ runner.arch }}
+          path: |
+            build/*.msi
+
+      - name: Upload artifact
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Application-${{ env.VERSION }}-${{ runner.os }}-${{ runner.arch }}
+          path: |
+            build/*.rpm
